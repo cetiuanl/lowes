@@ -48,6 +48,7 @@
     <Compile Include="Rol.cs" />
     <Compile Include="Utilerias.cs" />
     <Compile Include="Venta.cs" />
+    <Compile Include="Ventas.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LowesCD\LowesCD.csproj">
