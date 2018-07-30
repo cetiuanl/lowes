@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LowesCN
 {
-    public class Venta
+    public class CategoriaProducto
     {
     }
 }

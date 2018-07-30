@@ -8,5 +8,18 @@ namespace LowesCN
 {
      public class DetallesVenta
     {
+
+        #region Propiedades
+
+        #endregion
+
+        #region Contructores
+
+        #endregion
+
+        #region Procedimientos y Funciones
+
+        #endregion
+
     }
 }
