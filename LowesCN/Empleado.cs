@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LowesCN
 {
-    public class Class1
+    public class Empleado
     {
     }
 }
