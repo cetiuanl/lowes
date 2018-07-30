@@ -18,7 +18,15 @@ namespace LowesCN
         public string tipoPago { get; private set; }
 
         #endregion
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_idVenta"></param>
+        /// <param name="_idEmpleado"></param>
+        /// <param name="_fechaVenta"></param>
+        /// <param name="_estatus"></param>
+        /// <param name="_idCliente"></param>
+        /// <param name="_tipoPago"></param>
         #region Contructores
         public Ventas(int _idVenta, int _idEmpleado,DateTime _fechaVenta,
             int _estatus,int _idCliente,string _tipoPago)
