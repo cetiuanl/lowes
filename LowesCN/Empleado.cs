@@ -106,7 +106,22 @@ namespace LowesCN
         }
         public static void desactivar(int idEmpleado)
         {
+            if (idEmpleado > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idEmpleado", idEmpleado);
 
+                {
+                    if(DataBaseHelper.ExecuteNonQuery(Constantes.StoreProcedure.Empleado.Delete)==0)
+                    {
+                        throw new Exception("No se elimino el registro.");
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("Id Invalido.");
+            }
         }
         public static Empleado traerPorId(int idEmpleado)
         {
