@@ -16,6 +16,7 @@ namespace LowesCN
                 static public string Update = "dbo.SPUEmpleado";
                 static public string Delete = "dbo.SPDEmpleado";
             }
+
             static public class Rol
             {
                 static public string Insert = "dbo.SPIRolEmpleado";
@@ -25,6 +26,11 @@ namespace LowesCN
             {
                 static public string Insert = "dbo.SPIDetallesVenta";
                 static public string Update = "dbo.SPUDetallesVenta";
+            }
+            static public class Ventas
+            {
+                static public string Insert = "dbo.SPIVentas";
+                static public string Update = "dbo.SPUVentas";
             }
         }        
     }

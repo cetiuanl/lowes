@@ -82,102 +82,74 @@ namespace LowesCN
             }
         }
         
-        //public static void desactivar(int idDetalleVenta)
-        //{
-        //    if (idRol > 0)
-        //    {
-        //        Dictionary<string, object> parametros = new Dictionary<string, object>();
+        public static void desactivar(int idDetalleVenta)
+        {
+            if (idDetalleVenta > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idDetalleVenta", idDetalleVenta);
 
-        //        parametros.Add("@idRol", idRol);
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPDDetallesVenta", parametros) == 0)
+                {
+                    throw new Exception("No se elimino el registro.");
+                }                
+            }
+            else
+            {
+                throw new Exception("Id invalido.");
+            }
+        }
 
-        //        try
-        //        {
-        //            if (DataBaseHelper.ExecuteNonQuery("dbo.SPBRoles", parametros) == 0)
-        //            {
-        //                throw new CustomException("No se elimino el registro.");
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw new CustomException(ex.Message.ToString(), ex);
-        //        }
-        //    }
-        //}
-        //public static DetallesVenta traerPorId(int idDetalleVenta)
-        //{
-        //    Dictionary<string, object> parametros = new Dictionary<string, object>();
-        //    parametros.Add("@idRol", _idRol);
+        public static DetallesVenta traerPorId(int idDetalleVenta)
+        {
+            if (idDetalleVenta > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idDetalleVenta", idDetalleVenta);
 
-        //    DataTable dt = new DataTable();
+                DataTable dt = new DataTable();
 
-        //    try
-        //    {
-        //        DataBaseHelper.Fill(dt, "dbo.SPLRol", parametros);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message.ToString(), ex);
-        //    }
+                DataBaseHelper.Fill(dt, "dbo.SPSDetallesVenta", parametros);
 
-        //    Rol oResultado = new Rol();
+                DetallesVenta oResultado = null;
 
-        //    foreach (DataRow item in dt.Rows)
-        //    {
-        //        oResultado = new Rol(item);
-        //        break;
-        //    }
-        //    return oResultado;
-        //}
-        //public static List<DetallesVenta> traerTodos()
-        //{
-        //    Dictionary<string, object> parametros = new Dictionary<string, object>();
-
-        //    DataTable dt = new DataTable();
-
-        //    try
-        //    {
-        //        DataBaseHelper.Fill(dt, "dbo.SPLRol", parametros);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new CustomException(ex.Message.ToString(), ex);
-        //    }
-
-        //    List<Rol> listado = new List<Rol>();
-
-        //    foreach (DataRow item in dt.Rows)
-        //    {
-        //        listado.Add(new Rol(item));
-        //    }
-
-        //    return listado;
-        //}
-        //public static List<DetallesVenta> traerActivos()
-        //{
-        //    Dictionary<string, object> parametros = new Dictionary<string, object>();
-        //    parametros.Add("@esActivo", true);
+                foreach (DataRow item in dt.Rows)
+                {
+                    oResultado = new DetallesVenta(item);
+                    break;
+                }
+                return oResultado;
+            }
+            else
+            {
+                throw new Exception("Id invalido.");
+            }
+        }
 
 
-        //    DataTable dt = new DataTable();
+        public static List<DetallesVenta> traerTodos(bool soloActivos)
+        {
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
 
-        //    try
-        //    {
-        //        DataBaseHelper.Fill(dt, "dbo.SPLRol", parametros);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new CustomException(ex.Message.ToString(), ex);
-        //    }
+            if (soloActivos)
+            {
+                parametros.Add("@esActivo", true);
+            }   
 
-        //    List<Rol> listado = new List<Rol>();
+            DataTable dt = new DataTable();
 
-        //    foreach (DataRow item in dt.Rows)
-        //    {
-        //        listado.Add(new Rol(item));
-        //    }
+            DataBaseHelper.Fill(dt, "dbo.SPSDetallesVenta", parametros);
 
-        //    return listado;
-        //}
+            List<DetallesVenta> listado = new List<DetallesVenta>();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                listado.Add(new DetallesVenta(item));
+            }
+
+            return listado;
+        }
+
         #endregion
     }
 }
