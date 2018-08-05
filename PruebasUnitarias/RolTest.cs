@@ -1,6 +1,7 @@
 ﻿using LowesCN;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace PruebasUnitarias
 {
@@ -25,6 +26,45 @@ namespace PruebasUnitarias
             }
 
             Assert.IsTrue(result, mensaje);
+        }
+
+        [TestMethod]
+        public void TestDesactivar()
+        {
+            bool result = false;
+            string mensaje = "";
+
+            try
+            {
+                //var rolActual = Rol.traerTodos(true);
+                
+                //Rol.desactivar(rolActual.);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message.ToString();
+            }
+
+            Assert.IsTrue(result, mensaje);
+        }
+
+        [TestMethod]
+        public void TestTraerTodos()
+        {            
+            string mensaje = "";
+
+            List<Rol> roles = null;
+            try
+            {
+                roles = Rol.traerTodos();                
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message.ToString();
+            }
+
+            Assert.IsTrue((roles.Count > 0), mensaje);
         }
     }
 }
