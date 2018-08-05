@@ -81,7 +81,12 @@ namespace LowesCN
                 }
             }
         }
-        
+
+        public static implicit operator DetallesVenta(CategoriaProducto v)
+        {
+            throw new NotImplementedException();
+        }
+
         //public static void desactivar(int idDetalleVenta)
         //{
         //    if (idRol > 0)
