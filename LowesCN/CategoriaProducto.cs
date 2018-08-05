@@ -66,10 +66,20 @@ namespace LowesCN
         }
         public static void desactivar(int idCategoriaProducto)
         {
+            if (idCategoriaProducto > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idCategoriaProducto", idCategoriaProducto);
 
-
-
-
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPDCategoriaProducto", parametros) == 0)
+                {
+                    throw new Exception("No se elimino el registro");
+                }
+            }
+            else
+            {
+                throw new Exception("id no valida");
+            }
         }
         public static CategoriaProducto TraerPorId(int idCategoriaProducto) { return null; }
         public static List<CategoriaProducto> traerTodos() { return null; }
