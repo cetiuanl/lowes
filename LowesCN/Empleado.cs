@@ -125,16 +125,67 @@ namespace LowesCN
         }
         public static Empleado traerPorId(int idEmpleado)
         {
-            return null;
+            if (idEmpleado > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idEmpleado", idEmpleado);
+
+                DataTable dt = new DataTable();
+
+                DataBaseHelper.Fill(dt, "dbo.SPSEmpleado", parametros);
+
+                Empleado oResultado = null;
+
+                foreach (DataRow item in dt.Rows)
+                {
+                    oResultado = new Empleado(item);
+                    break;
+                }
+                return oResultado;
+            }
+            else
+            {
+                throw new Exception("Id invalido.");
+            }
         }
-        public static List<Empleado> traerTodos()
+        public static List<Empleado> traerTodos(bool soloActivos)
         {
-            return null;
+            Dictionary< string, object> parametros = new Dictionary<string, object>();
+
+            if(soloActivos)
+            {
+                parametros.Add("@esActivo", true);
+            }
+
+            DataTable dt = new DataTable();
+
+            DataBaseHelper.Fill(dt, "dbo.SPSEmpleado", parametros);
+
+            List<Empleado> listado = new List<Empleado>();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                listado.Add(new Empleado(item));
+            }
+            return listado;
         }
-        public static List<Empleado> traerActivos()
-        {
-            return null;
-        }
+        //public static List<Empleado> traerActivos()
+        //{
+        //    Dictionary<string, object> parametros = new Dictionary<string, object>();
+        //    parametros.Add("@esActivo", true);
+
+        //    DataTable dt = new DataTable();
+
+        //    DataBaseHelper.Fill(dt, "dbo.SPSEmpleado", parametros);
+
+        //    List<Empleado> listado = new List<Empleado>();
+
+        //    foreach (DataRow item in dt.Rows)
+        //    {
+        //        listado.Add(new Empleado(item));
+        //    }
+        //    return listado;
+        //}
         #endregion
     }
 }
