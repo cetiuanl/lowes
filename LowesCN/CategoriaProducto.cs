@@ -10,7 +10,6 @@ namespace LowesCN
 {
     public class CategoriaProducto
     {
-        private DataRow item;
         #region Propiedades
         public int idCategoria { get; private set; }
         public string nombre { get; private set; }
@@ -34,7 +33,7 @@ namespace LowesCN
 
         public CategoriaProducto(DataRow item)
         {
-            this.item = item;
+           // this.item = item;
         }
         #endregion
         #region metodos y funciones
@@ -127,11 +126,8 @@ namespace LowesCN
 
                 foreach (DataRow item in dt.Rows)
                 {
-            listado.Add(new CategoriaProducto(item));
-                
-                }
-                return listado;
+                parametros.Add("@esActivo", true);
     }
-   
+
         #endregion
     
