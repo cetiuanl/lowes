@@ -13,8 +13,8 @@ namespace LowesCN
         #region Propiedades
         public int idProducto { get; private set; }
         public string nombre { get; private set; }
-        public float precioCompra { get; private set; }
-        public float precioVenta { get; private set; }
+        public decimal precioCompra { get; private set; }
+        public decimal precioVenta { get; private set; }
         public decimal inventario { get; private set; }
         public int idCategoria { get; private set; }
         public string unidad { get; private set; }
@@ -24,7 +24,7 @@ namespace LowesCN
         #endregion
 
         #region Constructores
-        public Producto (int _idProducto, string _nombre, float _precioCompra, float _precioVenta, decimal _inventario, int _idCategoria, string _unidad, bool _esActivo, DateTime _fechaCreacion )
+        public Producto (int _idProducto, string _nombre, decimal _precioCompra, decimal _precioVenta, decimal _inventario, int _idCategoria, string _unidad, bool _esActivo, DateTime _fechaCreacion )
         { 
             idProducto = _idProducto;
             nombre = _nombre;
@@ -36,7 +36,7 @@ namespace LowesCN
             esActivo = _esActivo;
             fechaCracion = _fechaCreacion;
                 }
-        public Producto(int _idProducto, string _nombre, float _precioCompra, float _precioVenta, decimal _inventario, int _idCategoria, string _unidad, bool _esActivo)
+        public Producto(int _idProducto, string _nombre, decimal _precioCompra, decimal _precioVenta, decimal _inventario, int _idCategoria, string _unidad, bool _esActivo)
         {
             idProducto = _idProducto;
             nombre = _nombre;
