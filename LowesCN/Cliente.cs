@@ -42,6 +42,11 @@ namespace LowesCN
             correoElectronico = _correo;
         }
 
+        public static List<Cliente> traerTodos()
+        {
+            throw new NotImplementedException();
+        }
+
         public Cliente(DataRow fila)
         {
             idCliente = fila.Field<int>("idCliente");
