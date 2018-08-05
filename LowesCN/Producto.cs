@@ -91,7 +91,7 @@ namespace LowesCN
             }
             else //Si idDetalleVenta = cero, significa que es una registro nuevo, entonces usar Insert.
             {
-                if (DataBaseHelper.ExecuteNonQuery("dbo.Productos", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPIProductos", parametros) == 0)
                 {
                     throw new Exception("No se creó el registro.");
                 }
