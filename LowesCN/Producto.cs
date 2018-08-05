@@ -13,9 +13,9 @@ namespace LowesCN
         #region Propiedades
         public int idProducto { get; private set; }
         public string nombre { get; private set; }
-        public float precioCompra { get; private set; }
-        public float precioVenta { get; private set; }
-        public decimal inventario { get; private set; }
+        public double precioCompra { get; private set; }
+        public double precioVenta { get; private set; }
+        public double inventario { get; private set; }
         public int idCategoria { get; private set; }
         public string unidad { get; private set; }
         public bool esActivo { get; private set; }
@@ -24,7 +24,7 @@ namespace LowesCN
         #endregion
 
         #region Constructores
-        public Producto (int _idProducto, string _nombre, float _precioCompra, float _precioVenta, decimal _inventario, int _idCategoria, string _unidad, bool _esActivo, DateTime _fechaCreacion )
+        public Producto (int _idProducto, string _nombre, double _precioCompra, double _precioVenta, double _inventario, int _idCategoria, string _unidad, bool _esActivo, DateTime _fechaCreacion )
         { 
             idProducto = _idProducto;
             nombre = _nombre;
@@ -36,7 +36,7 @@ namespace LowesCN
             esActivo = _esActivo;
             fechaCracion = _fechaCreacion;
                 }
-        public Producto(int _idProducto, string _nombre, float _precioCompra, float _precioVenta, decimal _inventario, int _idCategoria, string _unidad, bool _esActivo)
+        public Producto(int _idProducto, string _nombre, double _precioCompra, double _precioVenta, double _inventario, int _idCategoria, string _unidad, bool _esActivo)
         {
             idProducto = _idProducto;
             nombre = _nombre;
@@ -52,9 +52,9 @@ namespace LowesCN
         {
             idProducto = fila.Field<int>("idProducto");
             nombre = fila.Field<string>("nombre");
-            precioCompra = fila.Field<float>("precioCompra");
-            precioVenta = fila.Field<float>("precioVenta");
-            inventario = fila.Field<decimal>("inventario");
+            precioCompra = fila.Field<double>("precioCompra");
+            precioVenta = fila.Field<double>("precioVenta");
+            inventario = fila.Field<double>("inventario");
             idCategoria = fila.Field<int>("idCategoria");
             unidad = fila.Field<string>("unidad");
             esActivo = fila.Field<bool>("esActivo");
@@ -91,7 +91,7 @@ namespace LowesCN
             }
             else //Si idDetalleVenta = cero, significa que es una registro nuevo, entonces usar Insert.
             {
-                if (DataBaseHelper.ExecuteNonQuery("dbo.Productos", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPIProductos", parametros) == 0)
                 {
                     throw new Exception("No se creó el registro.");
                 }

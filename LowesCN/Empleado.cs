@@ -90,14 +90,15 @@ namespace LowesCN
                 //a modificar
                 parametros.Add("@idEmpleado", this.idEmpleado);
                 //parametros.Add("@idEmpleado", 0);
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPUEmpleados", parametros) == 0)
+                //if (DataBaseHelper.ExecuteNonQuery("dbo.SPUEmpleados", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery(Constantes.StoreProcedure.Empleado.Update) == 0)
                 {
                     throw new Exception("No se actualizo el registro.");
                 }
             }
             else //Si idDetalleVenta = cero, significa que es una registro nuevo, entonces usar Insert.
             {
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPIEmpleados", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery(Constantes.StoreProcedure.Empleado.Insert) == 0)
                 {
                     throw new Exception("No se creó el registro.");
                 }
