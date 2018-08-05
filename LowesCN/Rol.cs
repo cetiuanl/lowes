@@ -70,14 +70,14 @@ namespace LowesCN
                 //a modificar
                 parametros.Add("@idRol", this.idRol);
 
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPURolEmpleado", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery(Constantes.StoreProcedure.Rol.Update, parametros) == 0)
                 {
                     throw new Exception("No se actualizo el registro.");
                 }
             }
             else //Si idRol = cero, significa que es una registro nuevo, entonces usar Insert.
             {
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPIRolEmpleado", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery(Constantes.StoreProcedure.Rol.Insert, parametros) == 0)
                 {
                     throw new Exception("No se creó el registro.");
                 }
@@ -89,7 +89,20 @@ namespace LowesCN
 
         public static void desactivar(int idRol)
         {
-            
+            if (idRol > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@IdRol", idRol);
+
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPDRolEmpleado", parametros) == 0)
+                {
+                    throw new Exception("No se elimino el registro.");
+                }
+            }
+            else
+            {
+                throw new Exception("Id Invalido.");
+            }
         }
         public static Rol traerPorId(int idrol)
         {
@@ -103,6 +116,8 @@ namespace LowesCN
         {
             return null;
         }
+        
+        
         #endregion
 
     }
