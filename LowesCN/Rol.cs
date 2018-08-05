@@ -89,7 +89,20 @@ namespace LowesCN
 
         public static void desactivar(int idRol)
         {
-            
+            if (idRol > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@IdRol", idRol);
+
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPDRolEmpleado", parametros) == 0)
+                {
+                    throw new Exception("No se elimino el registro.");
+                }
+            }
+            else
+            {
+                throw new Exception("Id Invalido.");
+            }
         }
         public static Rol traerPorId(int idrol)
         {
@@ -103,6 +116,8 @@ namespace LowesCN
         {
             return null;
         }
+        
+        
         #endregion
 
     }
