@@ -76,3 +76,4 @@ namespace LowesCN
         public static List<CategoriaProducto> traerActivos() { return null; }
         #endregion
     }
+}
