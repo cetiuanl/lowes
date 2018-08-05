@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace LowesCN
 {
     public class CategoriaProducto
-    {        
+    {
         #region Propiedades
         public int idCategoria { get; private set; }
         public string nombre { get; private set; }
@@ -33,7 +33,7 @@ namespace LowesCN
 
         public CategoriaProducto(DataRow item)
         {
-           // this.item = item;
+            // this.item = item;
         }
         #endregion
         #region metodos y funciones
@@ -113,29 +113,24 @@ namespace LowesCN
             }
         }
         public static List<CategoriaProducto> traerTodos(bool soloActivos)
+    {
+        Dictionary<string, object> parametros = new Dictionary<string, object>();
+        if (soloActivos)
+            parametros.Add("@esActivo", true);
+        DataTable dt = new DataTable();
+
+        DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
+
+        List<CategoriaProducto> listado = new List<CategoriaProducto>();
+
+        foreach (DataRow item in dt.Rows)
         {
-            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            //listado.Add("@esActivo", true);
+        }
 
-            if (soloActivos)
-            {
-                parametros.Add("@esActivo", true);
-            }
-
-            DataTable dt = new DataTable();
-
-            DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
-
-            List<CategoriaProducto> listado = new List<CategoriaProducto>();
-
-            foreach (DataRow item in dt.Rows)
-            {
-                listado.Add(new CategoriaProducto(item));
-
-            }
-            return listado;
-        }        
-        #endregion
+        return listado;
     }
-}
 
-    
+    #endregion
+    }    
+}
