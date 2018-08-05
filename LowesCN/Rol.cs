@@ -88,6 +88,9 @@ namespace LowesCN
 
 
         public static void desactivar(int idRol)
+        {
+            
+        }
         public static Rol traerPorId(int idrol)
         {
             return null;
