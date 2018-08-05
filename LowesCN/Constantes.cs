@@ -17,7 +17,8 @@ namespace LowesCN
             }
             static public class Rol
             {
-                static string Insert = "dbo.SPIRol";
+                static public string Insert = "dbo.SPIRolEmpleado";
+                static public string Update = "dbo.SPURolEmpleado";
             }
             static public class DetallesVenta
             {
