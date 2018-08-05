@@ -57,7 +57,7 @@ namespace PruebasUnitarias
             List<Rol> roles = null;
             try
             {
-                roles = Rol.traerTodos();                
+                roles = Rol.traerTodos(false);                
             }
             catch (Exception ex)
             {
