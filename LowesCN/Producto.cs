@@ -52,8 +52,8 @@ namespace LowesCN
         {
             idProducto = fila.Field<int>("idProducto");
             nombre = fila.Field<string>("nombre");
-            precioCompra = fila.Field<float>("precioCompra");
-            precioVenta = fila.Field<float>("precioVenta");
+            precioCompra = fila.Field<decimal>("precioCompra");
+            precioVenta = fila.Field<decimal>("precioVenta");
             inventario = fila.Field<decimal>("inventario");
             idCategoria = fila.Field<int>("idCategoria");
             unidad = fila.Field<string>("unidad");
