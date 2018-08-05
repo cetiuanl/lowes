@@ -105,16 +105,51 @@ namespace LowesCN
         }
         public static Cliente traerPorId(int idCliente)
         {
-            return null;
+            if (idCliente > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idCliente", idCliente);
+
+                DataTable dt = new DataTable();
+
+                DataBaseHelper.Fill(dt, "dbo.SPSClientes", parametros);
+
+                Cliente oResultado = null;
+
+                foreach (DataRow item in dt.Rows)
+                {
+                    oResultado = new Cliente(item);
+                    break;
+                }
+                return oResultado;
+            }
+            else
+            {
+                throw new Exception("Id invalido. ");
+            }
         }
-        public static List<Cliente> traerTodos()
+        public static List<Cliente> traerTodos(bool soloActivos)
         {
-            return null;
+             Dictionary<string, object> parametros = new Dictionary<string, object>();
+
+            if (soloActivos)
+            {
+                parametros.Add("@esActivo", true);
+            }
+
+            DataTable dt = new DataTable();
+
+            DataBaseHelper.Fill(dt, "dbo.SPSClientes", parametros);
+
+            List<Cliente> listado = new List<Cliente>();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                listado.Add(new Cliente(item));
+            }
+            return listado;
         }
-        public static List<Cliente> traerActivos()
-        {
-            return null;
-        }
+        
         #endregion
 
     }
