@@ -18,7 +18,7 @@ namespace PruebasUnitarias
             try
             {
                 Rol nuevoRol = new Rol(0, "nombre", "descripcion", true);
-                //nuevoRol.guardar();
+                nuevoRol.guardar();
                 result = true;
             }
             catch (Exception ex)
