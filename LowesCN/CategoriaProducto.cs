@@ -33,7 +33,7 @@ namespace LowesCN
 
         public CategoriaProducto(DataRow item)
         {
-           // this.item = item;
+            // this.item = item;
         }
         #endregion
         #region metodos y funciones
@@ -110,24 +110,27 @@ namespace LowesCN
             }
             else {
                 throw new Exception("id no valido.");
-            }        
+            }
         }
-
-}        public static List<CategoriaProducto> traerTodos(bool soloActivos)
-    { 
-                Dictionary<string, object> parametros = new Dictionary<string, object>();
+        public static List<CategoriaProducto> traerTodos(bool soloActivos)
+    {
+        Dictionary<string, object> parametros = new Dictionary<string, object>();
         if (soloActivos)
             parametros.Add("@esActivo", true);
-                DataTable dt = new DataTable();
+        DataTable dt = new DataTable();
 
-                DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
+        DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
 
-                List<CategoriaProducto> listado = new List<CategoriaProducto>();
+        List<CategoriaProducto> listado = new List<CategoriaProducto>();
 
-                foreach (DataRow item in dt.Rows)
-                {
-                parametros.Add("@esActivo", true);
+        foreach (DataRow item in dt.Rows)
+        {
+            //listado.Add("@esActivo", true);
+        }
+
+        return listado;
     }
 
-        #endregion
-    
+    #endregion
+    }    
+}
