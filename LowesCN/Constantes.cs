@@ -13,6 +13,7 @@ namespace LowesCN
             static public class Empleado
             {
                 static string Insert = "dbo.SPIEmpleado";
+                static string Update = "dbo.SPUEmpleado";
             }
             static public class Rol
             {
