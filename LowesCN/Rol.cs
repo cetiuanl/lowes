@@ -85,12 +85,24 @@ namespace LowesCN
 
         }
 
-        
-        
+
+
         public static void desactivar(int idRol)
+        {
+            
+        }
         public static Rol traerPorId(int idrol)
+        {
+            return null;
+        }
         public static List<Rol> traerTodos()
+        {
+            return null;
+        }
         public static List<Rol> traerActivos()
+        {
+            return null;
+        }
         #endregion
 
     }
