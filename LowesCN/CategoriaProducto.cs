@@ -114,11 +114,11 @@ namespace LowesCN
             }        
         }
 
-}        public static List<CategoriaProducto> traerTodos()
+}        public static List<CategoriaProducto> traerTodos(bool soloActivos)
     { 
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
-
-
+        if (soloActivos)
+            parametros.Add("@esActivo", true);
                 DataTable dt = new DataTable();
 
                 DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
@@ -132,26 +132,6 @@ namespace LowesCN
                 }
                 return listado;
     }
-    public static List<CategoriaProducto> traerActivos()
-    {
-        {
-            Dictionary<string, object> parametros = new Dictionary<string, object>();
-            parametros.Add("@esActivo",true);
-
-
-            DataTable dt = new DataTable();
-
-            DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
-
-            List<CategoriaProducto> listado = new List<CategoriaProducto>();
-
-            foreach (DataRow item in dt.Rows)
-            {
-                listado.Add(new CategoriaProducto(item));
-
-            }
-            return listado;
-        }
-    }
+   
         #endregion
     
