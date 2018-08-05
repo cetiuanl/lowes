@@ -33,15 +33,13 @@ namespace LowesCN
             esActivo = _esActivo;
             fechaCreacion = _fechaCreacion;
         }
-        public Cliente(int _idCliente, string _nombre, string _direccion, string _RFC, string _correo,
-                        bool _esActivo)
+        public Cliente(int _idCliente, string _nombre, string _direccion, string _RFC, string _correo)
         {
             idCliente = _idCliente;
             nombreCompleto = _nombre;
             direccion = _direccion;
             RFC = _RFC;
             correoElectronico = _correo;
-            esActivo = _esActivo;
         }
 
         public Cliente(DataRow fila)
@@ -90,7 +88,20 @@ namespace LowesCN
         }
         public static void desactivar(int idCliente)
         {
+            if(idCliente > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idCliente", idCliente);
 
+                if(DataBaseHelper.ExecuteNonQuery("dbo.SPDClientes", parametros) == 0)
+                {
+                    throw new Exception("No se elimino el registro.");
+                }
+                else
+                {
+                    throw new Exception("Id invalido.");
+                }
+            }
         }
         public static Cliente traerPorId(int idCliente)
         {
