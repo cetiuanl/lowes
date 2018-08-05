@@ -94,15 +94,15 @@ namespace LowesCN
         }
         public static Cliente traerPorId(int idCliente)
         {
-
+            return null;
         }
         public static List<Cliente> traerTodos()
         {
-
+            return null;
         }
         public static List<Cliente> traerActivos()
         {
-
+            return null;
         }
         #endregion
 
