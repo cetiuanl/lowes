@@ -1,16 +1,14 @@
 ﻿using LowesCN;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PruebasUnitarias
 {
-    class RolTest
+    [TestClass]
+    public class RolTest
     {
-        public void RolGuardar()
+        [TestMethod]
+        public void TestGuardar()
         {
             bool result = false;
             string mensaje = "";
