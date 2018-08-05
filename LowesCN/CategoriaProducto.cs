@@ -1,6 +1,7 @@
 ﻿using LowesCD;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace LowesCN
 {
     public class CategoriaProducto
     {
+        private DataRow item;
         #region Propiedades
         public int idCategoria { get; private set; }
         public string nombre { get; private set; }
@@ -28,6 +30,11 @@ namespace LowesCN
             descripcion = _descripcion;
 
 
+        }
+
+        public CategoriaProducto(DataRow item)
+        {
+            this.item = item;
         }
         #endregion
         #region metodos y funciones
@@ -81,9 +88,70 @@ namespace LowesCN
                 throw new Exception("id no valida");
             }
         }
-        public static CategoriaProducto TraerPorId(int idCategoriaProducto) { return null; }
-        public static List<CategoriaProducto> traerTodos() { return null; }
-        public static List<CategoriaProducto> traerActivos() { return null; }
-        #endregion
+        public static CategoriaProducto TraerPorId(int idCategoriaProducto)
+        {
+            if (idCategoriaProducto > 0)
+            {
+
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("idCategoriaProducto", idCategoriaProducto);
+
+                DataTable dt = new DataTable();
+
+                DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
+
+                CategoriaProducto oResultado = null;
+
+                foreach (DataRow item in dt.Rows)
+                {
+                    oResultado = new CategoriaProducto(item);
+                    break;
+                }
+                return oResultado;
+            }
+            else {
+                throw new Exception("id no valido.");
+            }        
+        }
+
+}        public static List<CategoriaProducto> traerTodos()
+    { 
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+
+
+                DataTable dt = new DataTable();
+
+                DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
+
+                List<CategoriaProducto> listado = new List<CategoriaProducto>();
+
+                foreach (DataRow item in dt.Rows)
+                {
+            listado.Add(new CategoriaProducto(item));
+                
+                }
+                return listado;
     }
-}
+    public static List<CategoriaProducto> traerActivos()
+    {
+        {
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("@esActivo",true);
+
+
+            DataTable dt = new DataTable();
+
+            DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
+
+            List<CategoriaProducto> listado = new List<CategoriaProducto>();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                listado.Add(new CategoriaProducto(item));
+
+            }
+            return listado;
+        }
+    }
+        #endregion
+    

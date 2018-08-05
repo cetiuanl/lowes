@@ -81,14 +81,14 @@ namespace LowesCN
                 }
             }
         }
-
+        
         public static void desactivar(int idDetalleVenta)
         {
             if (idDetalleVenta > 0)
             {
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("@idDetalleVenta", idDetalleVenta);
-                               
+
                 if (DataBaseHelper.ExecuteNonQuery("dbo.SPDDetallesVenta", parametros) == 0)
                 {
                     throw new Exception("No se elimino el registro.");
@@ -139,7 +139,7 @@ namespace LowesCN
             DataTable dt = new DataTable();
 
             DataBaseHelper.Fill(dt, "dbo.SPSDetallesVenta", parametros);
-            
+
             List<DetallesVenta> listado = new List<DetallesVenta>();
 
             foreach (DataRow item in dt.Rows)
@@ -149,7 +149,7 @@ namespace LowesCN
 
             return listado;
         }
-       
+
         #endregion
     }
 }
