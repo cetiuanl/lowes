@@ -88,7 +88,20 @@ namespace LowesCN
         }
         public static void desactivar(int idCliente)
         {
+            if(idCliente > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idCliente", idCliente);
 
+                if(DataBaseHelper.ExecuteNonQuery("dbo.SPDClientes", parametros) == 0)
+                {
+                    throw new Exception("No se elimino el registro.");
+                }
+                else
+                {
+                    throw new Exception("Id invalido.");
+                }
+            }
         }
         public static Cliente traerPorId(int idCliente)
         {
