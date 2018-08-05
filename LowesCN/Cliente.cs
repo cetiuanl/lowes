@@ -33,15 +33,13 @@ namespace LowesCN
             esActivo = _esActivo;
             fechaCreacion = _fechaCreacion;
         }
-        public Cliente(int _idCliente, string _nombre, string _direccion, string _RFC, string _correo,
-                        bool _esActivo)
+        public Cliente(int _idCliente, string _nombre, string _direccion, string _RFC, string _correo)
         {
             idCliente = _idCliente;
             nombreCompleto = _nombre;
             direccion = _direccion;
             RFC = _RFC;
             correoElectronico = _correo;
-            esActivo = _esActivo;
         }
 
         public Cliente(DataRow fila)
