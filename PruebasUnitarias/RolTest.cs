@@ -17,7 +17,7 @@ namespace PruebasUnitarias
 
             try
             {
-                Rol nuevoRol = new Rol(0, "nombre", "descripcion", true);
+                Rol nuevoRol = new Rol(0, "nombre", "descripcion");
                 nuevoRol.guardar();
                 result = true;
             }
