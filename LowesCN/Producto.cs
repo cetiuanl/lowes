@@ -81,7 +81,7 @@ namespace LowesCN
             {
                 //Agregamos el parametro del id de la tabla utilizado para ubicar el registro
                 //a modificar
-                parametros.Add("@idProductos", this.idProducto);
+                parametros.Add("@idProducto", this.idProducto);
                 
                 if (DataBaseHelper.ExecuteNonQuery("dbo.SPUProductos", parametros) == 0)
                 {
