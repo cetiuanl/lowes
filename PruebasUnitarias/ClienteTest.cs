@@ -26,6 +26,25 @@ namespace PruebasUnitarias
 
             Assert.IsTrue(result, mensaje);
         }
+        [TestMethod]
+        public void Desactivar()
+        {
+            bool esActivo = false;
+            string mensaje2 = "";
+
+            try
+            {
+                Cliente.desactivar(4);
+                esActivo = true;
+            }
+            catch (Exception ex)
+            {
+                mensaje2 = ex.Message.ToString();
+            }
+            Assert.IsTrue(esActivo, mensaje2);
+        }
     }
+
+   
 
 }
