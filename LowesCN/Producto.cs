@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LowesCD;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -77,7 +78,7 @@ namespace LowesCN
             parametros.Add("@unidad", this.unidad);
 
             //Si idDetalleVenta es mayor a 0, significa que es una registro existente, usar un Update            
-            if (this.idDetalleVenta > 0)
+            if (this.idProducto > 0)
             {
                 //Agregamos el parametro del id de la tabla utilizado para ubicar el registro
                 //a modificar
