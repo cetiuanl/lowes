@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LowesCD;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,31 +32,26 @@ namespace LowesCN
         #endregion
         #region metodos y funciones
         public void guardar()
-        {
-        }
-        public static void desactivar(int idCategoriaProducto)
-        {
-
-            //Creo un diccionario para guardar los parametros
+        {//Creo un diccionario para guardar los parametros
             Dictionary<string, object> parametros = new Dictionary<string, object>();
             //Al diccionario "parametros" agregamos el nombre del parametro del
             // Store Procedure y su valor (propiedad de la clase correspondiente)            
 
-            parametros.Add("@idCategoriaProducto", this.idCategoriaProducto);
-            parametros.Add("@Descripcion", this.Descripcion);
+            parametros.Add("@idCategoria", this.idCategoria);
+            parametros.Add("@Descripcion", this.descripcion);
             parametros.Add("@nombre", this.nombre);
-            
+
 
             //Si idCategoriaProducto es mayor a 0, significa que es una registro existente, usar un Update            
-            if (this.idCategoriaProducto > 0)
+            if (this.idCategoria > 0)
             {
                 //Agregamos el parametro del id de la tabla utilizado para ubicar el registro
                 //a modificar
-                parametros.Add("@idCategoriaProducto", this.idCategoriaProducto);
-                parametros.Add("@descripcion", this.Descripcion)
-                parametros.Add("@nombre", this.nombre)
+                parametros.Add("@idCategoria", this.idCategoria);
+                parametros.Add("@descripcion", this.descripcion);
+                parametros.Add("@nombre", this.nombre);
 
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPUCategoriaProducto", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPUCategoria", parametros) == 0)
                 {
                     throw new Exception("No se actualizo el registro.");
                 }
@@ -67,8 +63,16 @@ namespace LowesCN
                     throw new Exception("No se creó el registro.");
                 }
             }
+        }
+        public static void desactivar(int idCategoriaProducto)
+        {
+
+
+
 
         }
-        public static CategoriaProducto TraerPorId(int idCategoriaProducto) {return null }
-        public static List<CategoriaProducto> traerTodos() { return null}
-        public static List<CategoriaProducto> traerActivos() { return null}
+        public static CategoriaProducto TraerPorId(int idCategoriaProducto) { return null; }
+        public static List<CategoriaProducto> traerTodos() { return null; }
+        public static List<CategoriaProducto> traerActivos() { return null; }
+        #endregion
+    }
