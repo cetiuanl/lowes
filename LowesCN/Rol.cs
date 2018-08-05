@@ -31,12 +31,11 @@ namespace LowesCN
             fechaCreacion = _fechaCreacion;
         }
 
-        public Rol(int _idRol, string _nombre, string _descripcion, Boolean _esActivo)
+        public Rol(int _idRol, string _nombre, string _descripcion)
         {
             idRol = _idRol;
             nombre = _nombre;
             descripcion = _descripcion;
-            esActivo = _esActivo;
         }
 
         public Rol(DataRow fila)
