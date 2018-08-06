@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace LowesCN
 {
     public class CategoriaProducto
-    {        
+    {
         #region Propiedades
         public int idCategoria { get; private set; }
         public string nombre { get; private set; }
@@ -110,32 +110,24 @@ namespace LowesCN
             }
             else {
                 throw new Exception("id no valido.");
-            }
+            }        
         }
-        public static List<CategoriaProducto> traerTodos(bool soloActivos)
-        {
-            Dictionary<string, object> parametros = new Dictionary<string, object>();
 
-            if (soloActivos)
-            {
+}        public static List<CategoriaProducto> traerTodos(bool soloActivos)
+    { 
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+        if (soloActivos)
+            parametros.Add("@esActivo", true);
+                DataTable dt = new DataTable();
+
+                DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
+
+                List<CategoriaProducto> listado = new List<CategoriaProducto>();
+
+                foreach (DataRow item in dt.Rows)
+                {
                 parametros.Add("@esActivo", true);
-            }
-
-            DataTable dt = new DataTable();
-
-            DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
-
-            List<CategoriaProducto> listado = new List<CategoriaProducto>();
-
-            foreach (DataRow item in dt.Rows)
-            {
-                listado.Add(new CategoriaProducto(item));
-
-            }
-            return listado;
-        }        
-        #endregion
     }
-}
 
+        #endregion
     
