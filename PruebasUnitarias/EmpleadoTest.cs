@@ -57,17 +57,17 @@ namespace PruebasUnitarias
             {
                 string mensaje = "";
 
-                List<Rol> roles = null;
+                List<Rol> listado = null;
                 try
                 {
-                    roles = Rol.traerTodos(false);
+                    listado = Rol.traerTodos(false);
                 }
                 catch (Exception ex)
                 {
                     mensaje = ex.Message.ToString();
                 }
 
-                Assert.IsTrue((roles.Count > 0), mensaje);
+                Assert.IsTrue((listado.Count > 0), mensaje);
             }
         }
     }
