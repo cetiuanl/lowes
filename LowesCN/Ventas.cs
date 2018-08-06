@@ -10,6 +10,12 @@ namespace LowesCN
 {
     public class Ventas
     {
+        private int v1;
+        private int v2;
+        private int v3;
+        private int v4;
+        private int v5;
+        private string v6;
         #region Propiedades
         public int idVenta { get; private set; }
         public int idEmpleado { get; private set; }
@@ -39,42 +45,68 @@ namespace LowesCN
             idCliente = fila.Field<int>("idCliente");
             tipoPago = fila.Field<string>("tipoPago");
         }
+
+        public Ventas(int v1, int v2, int v3, int v4, int v5, string v6)
+        {
+            this.v1 = v1;
+            this.v2 = v2;
+            this.v3 = v3;
+            this.v4 = v4;
+            this.v5 = v5;
+            this.v6 = v6;
+        }
         #endregion
 
         #region Procedimientos y Funciones
-        public void guardar() {
-        //Creo un diccionario para guardar los parametros
-        Dictionary<string, object> parametros = new Dictionary<string, object>();
-        //Al diccionario "parametros" agregamos el nombre del parametro del
-        // Store Procedure y su valor (propiedad de la clase correspondiente)            
-
-        parametros.Add("@idEmpleado", this.idEmpleado);
-        parametros.Add("@fechaVenta", this.fechaVenta);
-        parametros.Add("@estatus", this.estatus);
-        parametros.Add("@idCliente", this.idCliente);
-        parametros.Add("@tipoPago", this.tipoPago);
-
-        //Si idDetalleVenta es mayor a 0, significa que es una registro existente, usar un Update            
-        if (this.@idVenta > 0)
+        public void guardar()
         {
-            //Agregamos el parametro del id de la tabla utilizado para ubicar el registro
-            //a modificar
-            parametros.Add("@idVenta", this.idEmpleado);
-            if (DataBaseHelper.ExecuteNonQuery("dbo.SPUVentas", parametros) == 0)
+            //Creo un diccionario para guardar los parametros
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            //Al diccionario "parametros" agregamos el nombre del parametro del
+            // Store Procedure y su valor (propiedad de la clase correspondiente)            
+
+            parametros.Add("@idEmpleado", this.idEmpleado);
+            parametros.Add("@fechaVenta", this.fechaVenta);
+            parametros.Add("@estatus", this.estatus);
+            parametros.Add("@idCliente", this.idCliente);
+            parametros.Add("@tipoPago", this.tipoPago);
+
+            //Si idDetalleVenta es mayor a 0, significa que es una registro existente, usar un Update            
+            if (this.@idVenta > 0)
             {
-                throw new Exception("No se actualizo el registro.");
+                //Agregamos el parametro del id de la tabla utilizado para ubicar el registro
+                //a modificar
+                parametros.Add("@idVenta", this.idEmpleado);
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPUVentas", parametros) == 0)
+                    {
+                        throw new Exception("No se actualizo el registro.");
+                    }
+                else //Si idVenta = 0, significa que es una registro nuevo, entonces usar Insert.
+                    {
+                        if (DataBaseHelper.ExecuteNonQuery(Constantes.StoreProcedure.Ventas.Insert, parametros) == 0)
+                            {
+                                throw new Exception("No se creó el registro.");
+                            }
+                    }
             }
-        }
-            else //Si idVenta = 0, significa que es una registro nuevo, entonces usar Insert.
-            {
-            if (DataBaseHelper.ExecuteNonQuery("dbo.SPIVentas", parametros) == 0)
-            {
-                throw new Exception("No se creó el registro.");
-            }
-        }
         }
         public static void desactivar(int idVenta)
         {
+            if (idVenta > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idVenta", idVenta);
+
+                if(DataBaseHelper.ExecuteNonQuery("dbo.SPDVenta",parametros)==0)
+                {
+                    throw new Exception("No se elimino el registro");
+                }
+            else
+                {
+                    throw new Exception("Id inválido");
+                }
+            }
+
         }
         public static Ventas traerPorId(int idVenta)
         {
@@ -88,10 +120,6 @@ namespace LowesCN
         {
             return null;
         }
-
-
-
-
         #endregion
 
     }
