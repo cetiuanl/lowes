@@ -15,8 +15,8 @@ namespace PruebasUnitarias
 
             try
             {
-                Ventas nuevoRol = new Ventas(0,109,2018-08-05,1,3,"Efectivo");
-                nuevoRol.guardar();
+                Ventas nuevoVenta = new Ventas(0,109,2018-08-05,1,3,"Efectivo");
+                nuevoVenta.guardar();
                 result = true;
             }
             catch (Exception ex)
