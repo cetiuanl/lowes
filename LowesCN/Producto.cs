@@ -99,16 +99,65 @@ namespace LowesCN
 
         }
         public static void desactivar(int idProducto) {
+            if (idProducto > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idProducto", idProducto);
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPDProductos", parametros) == 0)
+                {
+                    throw new Exception("No se elimino el registro");
+                }
+            }
+            else {
+                throw new Exception("Id invalido");
+            }
         }
         public static Producto traerPorId(int idProducto) {
-            return null;
+            if (idProducto > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+            parametros.Add("@idProducto", idProducto);
+
+            
+                DataTable dt = new DataTable();
+
+                DataBaseHelper.Fill(dt, "dbo.SPSProductos", parametros);
+
+                Producto oResultado = null;
+                foreach (DataRow item in dt.Rows)
+                {
+                    oResultado = new Producto(item);
+                    break;
+
+                }
+                return oResultado;
+            }
+            else {
+                throw new Exception("Id invalido");
+            }
         }
-        public static List<Producto> traerTodos() {
-            return null;
-        }
-        public static List<Producto> traerActivos() {
-            return null;
-        }
+        public static List<Producto> traerTodos(bool soloActivos) {
+           
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+            if (soloActivos) {
+                parametros.Add("@esActivo", true);
+            }
+
+                DataTable dt = new DataTable();
+
+                DataBaseHelper.Fill(dt, "dbo.SPSProductos", parametros);
+
+            List<Producto> listado = new List<Producto>();
+                foreach (DataRow item in dt.Rows)
+                {
+                listado.Add(new Producto(item));
+
+                }
+                return listado;
+            }
+           
+        
+       
 
 
         #endregion

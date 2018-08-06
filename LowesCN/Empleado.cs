@@ -90,14 +90,15 @@ namespace LowesCN
                 //a modificar
                 parametros.Add("@idEmpleado", this.idEmpleado);
                 //parametros.Add("@idEmpleado", 0);
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPUEmpleados", parametros) == 0)
+                //if (DataBaseHelper.ExecuteNonQuery("dbo.SPUEmpleados", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery(Constantes.StoreProcedure.Empleado.Update) == 0)
                 {
                     throw new Exception("No se actualizo el registro.");
                 }
             }
             else //Si idDetalleVenta = cero, significa que es una registro nuevo, entonces usar Insert.
             {
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPIEmpleados", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery(Constantes.StoreProcedure.Empleado.Insert) == 0)
                 {
                     throw new Exception("No se creó el registro.");
                 }
@@ -105,20 +106,86 @@ namespace LowesCN
         }
         public static void desactivar(int idEmpleado)
         {
+            if (idEmpleado > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idEmpleado", idEmpleado);
 
+                {
+                    if(DataBaseHelper.ExecuteNonQuery(Constantes.StoreProcedure.Empleado.Delete)==0)
+                    {
+                        throw new Exception("No se elimino el registro.");
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("Id Invalido.");
+            }
         }
         public static Empleado traerPorId(int idEmpleado)
         {
-            return null;
+            if (idEmpleado > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idEmpleado", idEmpleado);
+
+                DataTable dt = new DataTable();
+
+                DataBaseHelper.Fill(dt, "dbo.SPSEmpleado", parametros);
+
+                Empleado oResultado = null;
+
+                foreach (DataRow item in dt.Rows)
+                {
+                    oResultado = new Empleado(item);
+                    break;
+                }
+                return oResultado;
+            }
+            else
+            {
+                throw new Exception("Id invalido.");
+            }
         }
-        public static List<Empleado> traerTodos()
+        public static List<Empleado> traerTodos(bool soloActivos)
         {
-            return null;
+            Dictionary< string, object> parametros = new Dictionary<string, object>();
+
+            if(soloActivos)
+            {
+                parametros.Add("@esActivo", true);
+            }
+
+            DataTable dt = new DataTable();
+
+            DataBaseHelper.Fill(dt, "dbo.SPSEmpleado", parametros);
+
+            List<Empleado> listado = new List<Empleado>();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                listado.Add(new Empleado(item));
+            }
+            return listado;
         }
-        public static List<Empleado> traerActivos()
-        {
-            return null;
-        }
+        //public static List<Empleado> traerActivos()
+        //{
+        //    Dictionary<string, object> parametros = new Dictionary<string, object>();
+        //    parametros.Add("@esActivo", true);
+
+        //    DataTable dt = new DataTable();
+
+        //    DataBaseHelper.Fill(dt, "dbo.SPSEmpleado", parametros);
+
+        //    List<Empleado> listado = new List<Empleado>();
+
+        //    foreach (DataRow item in dt.Rows)
+        //    {
+        //        listado.Add(new Empleado(item));
+        //    }
+        //    return listado;
+        //}
         #endregion
     }
 }
