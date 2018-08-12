@@ -64,8 +64,26 @@ namespace LowesCN
         #endregion
 
         #region Procedimientos y funciones
+        private string esValido() {
+            string resultado = "";
+            if (this.idCategoria == 0)
+            {
+                resultado = resultado + "El campo idCategoria es invalido";
+            }
+            if (this.idProducto == 0)
+            {
+                resultado = resultado + "El campo idPreducto es invalido";
+            }
+            return resultado;
+        }
         public void guardar() {
-            //Creo un diccionario para guardar los parametros
+            string mensaje = esValido();
+            if (mensaje.Length > 0)
+            {
+                throw new Exception(mensaje);
+            }
+
+                //Creo un diccionario para guardar los parametros
             Dictionary<string, object> parametros = new Dictionary<string, object>();
             //Al diccionario "parametros" agregamos el nombre del parametro del
             // Store Procedure y su valor (propiedad de la clase correspondiente)            
