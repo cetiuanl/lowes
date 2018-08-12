@@ -52,8 +52,31 @@ namespace LowesCN
         #endregion
 
         #region Procedimientos y Funciones
+        private string esValido()
+        {
+            string resultado = "";
+            if (this.nombre == "")
+            {
+                resultado = resultado + "El campo nombre es invalido";
+            }
+            if (this.descripcion== "") 
+            {
+                resultado = resultado + "El campo descripción es invalido";
+            }
+
+
+            return resultado;
+        }
+
         public void guardar()
         {
+
+            string mensaje = esValido();
+            if (mensaje.Length > 0)
+            {
+                throw new Exception(mensaje);
+            }
+
             //Creo un diccionario para guardar los parametros
             Dictionary<string, object> parametros = new Dictionary<string, object>();
             //Al diccionario "parametros" agregamos el nombre del parametro del
@@ -104,20 +127,60 @@ namespace LowesCN
                 throw new Exception("Id Invalido.");
             }
         }
-        public static Rol traerPorId(int idrol)
+        public static Rol traerPorId(int idRol)
         {
-            return null;
+            if (idRol > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@idRol", idRol);
+
+                DataTable dt = new DataTable();
+
+                DataBaseHelper.Fill(dt, "dbo.SPSRolEmpleado", parametros);
+
+                Rol oResultado = null;
+
+                foreach (DataRow item in dt.Rows)
+                {
+                    oResultado = new Rol(item);
+                    break;
+                }
+                return oResultado;
+            }
+            else
+            {
+                throw new Exception("Id invalido.");
+            }
         }
-        public static List<Rol> traerTodos()
-        {
-            return null;
+        public static List<Rol> traerTodos(bool soloActivos)
+        { 
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+
+            if (soloActivos)
+            {
+                parametros.Add("@esActivo", true);
+            }
+
+            DataTable dt = new DataTable();
+
+            DataBaseHelper.Fill(dt, "dbo.SPSRolEmpleado", parametros);
+
+            List<Rol> listado = new List<Rol>();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                listado.Add(new Rol(item));
+            }
+            return listado;
+         
         }
         public static List<Rol> traerActivos()
         {
             return null;
+
         }
-        
-        
+
+
         #endregion
 
     }

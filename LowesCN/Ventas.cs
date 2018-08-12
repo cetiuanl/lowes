@@ -10,13 +10,6 @@ namespace LowesCN
 {
     public class Ventas
     {
-        private int v1;
-        private int v2;
-        private int v3;
-        private int v4;
-        private int v5;
-        private string v6;
-
         //private int v1;
         //private int v2;
         //private int v3;
@@ -54,15 +47,15 @@ namespace LowesCN
             tipoPago = fila.Field<string>("tipoPago");
         }
 
-        public Ventas(int v1, int v2, int v3, int v4, int v5, string v6)
-        {
-            this.v1 = v1;
-            this.v2 = v2;
-            this.v3 = v3;
-            this.v4 = v4;
-            this.v5 = v5;
-            this.v6 = v6;
-        }
+        //public Ventas(int v1, int v2, int v3, int v4, int v5, string v6)
+        //{
+        //    this.v1 = v1;
+        //    this.v2 = v2;
+        //    this.v3 = v3;
+        //    this.v4 = v4;
+        //    this.v5 = v5;
+        //    this.v6 = v6;
+        //}
 
         //public Ventas(int v1, int v2, int v3, int v4, int v5, string v6)
         //{
@@ -76,8 +69,29 @@ namespace LowesCN
         #endregion
 
         #region Procedimientos y Funciones
+
+        private string esValido()
+        {
+            string resultado = "";
+            if (this.idVenta==0)
+                {
+                resultado = resultado + "El campo idVenta es inválido";
+                }
+            if (this.tipoPago == "")
+            {
+                resultado = resultado + "El campo idVenta es inválido";
+            }
+            return resultado;
+        }
+
         public void guardar()
         {
+            string mensaje = esValido();
+            if (mensaje.Length>0)
+            {
+                throw new Exception(mensaje);
+            }
+            
             //Creo un diccionario para guardar los parametros
             Dictionary<string, object> parametros = new Dictionary<string, object>();
             //Al diccionario "parametros" agregamos el nombre del parametro del
