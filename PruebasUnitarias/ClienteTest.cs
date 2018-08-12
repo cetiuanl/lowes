@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LowesCN;
+using System.Collections.Generic;
 
 namespace PruebasUnitarias
 {
@@ -29,19 +30,37 @@ namespace PruebasUnitarias
         [TestMethod]
         public void Desactivar()
         {
-            bool esActivo = false;
+            bool result = false;
             string mensaje2 = "";
 
             try
             {
-                Cliente.desactivar(4);
-                esActivo = true;
+                Cliente.desactivar(1);
+                result = true;
             }
             catch (Exception ex)
             {
                 mensaje2 = ex.Message.ToString();
             }
-            Assert.IsTrue(esActivo, mensaje2);
+            Assert.IsTrue(result, mensaje2);
+        }
+
+        [TestMethod]
+        public void TestTraerTodos()
+        {
+            string mensaje = "";
+
+            List<Cliente> Clientes = null;
+            try
+            {
+                Clientes = Cliente.traerTodos(false);
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message.ToString();
+            }
+
+            Assert.IsTrue((Clientes.Count > 0), mensaje);
         }
     }
 

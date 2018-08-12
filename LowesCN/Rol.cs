@@ -52,8 +52,31 @@ namespace LowesCN
         #endregion
 
         #region Procedimientos y Funciones
+        private string esValido()
+        {
+            string resultado = "";
+            if (this.nombre == "")
+            {
+                resultado = resultado + "El campo nombre es invalido";
+            }
+            if (this.descripcion== "") 
+            {
+                resultado = resultado + "El campo descripción es invalido";
+            }
+
+
+            return resultado;
+        }
+
         public void guardar()
         {
+
+            string mensaje = esValido();
+            if (mensaje.Length > 0)
+            {
+                throw new Exception(mensaje);
+            }
+
             //Creo un diccionario para guardar los parametros
             Dictionary<string, object> parametros = new Dictionary<string, object>();
             //Al diccionario "parametros" agregamos el nombre del parametro del

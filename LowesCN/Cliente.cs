@@ -42,6 +42,11 @@ namespace LowesCN
             correoElectronico = _correo;
         }
 
+        public static List<Cliente> traerTodos()
+        {
+            throw new NotImplementedException();
+        }
+
         public Cliente(DataRow fila)
         {
             idCliente = fila.Field<int>("idCliente");
@@ -55,8 +60,31 @@ namespace LowesCN
         #endregion
 
         #region Metodos y funciones
+        private string esValido()
+        {
+            if (this.nombreCompleto.Length == 0)
+            {
+                string resultado = "";
+                if (this.nombreCompleto.Length == 0)
+                {
+                    resultado = resultado + "El campo nomnbreCompleto es invalido.";
+                }
+
+                if(this.direccion.Length == 0)
+                {
+                    resultado = resultado + "El campo direccion es invalido.";
+                }
+            }
+            return "";
+        }
         public void guardar()
         {
+
+            if (esValido().Length > 0)
+            {
+                //objeto incorrecto 
+                return;
+            }
             //Creo un diccionario para guardar los parametros
             Dictionary<string, object> parametros = new Dictionary<string, object>();
             //Al diccionario "parametros" agregamos el nombre del parametro del

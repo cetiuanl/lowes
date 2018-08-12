@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Lowes
 {
-    public partial class Form1 : Form
+    public partial class frmCliente : Form
     {
-        public Form1()
+        public frmCliente()
         {
             InitializeComponent();
+        }
+
+        private void frmCliente_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
