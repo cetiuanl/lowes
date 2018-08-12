@@ -47,8 +47,44 @@ namespace LowesCN
         #endregion
 
         #region Metodos y funciones
+        public bool deboGuardar()
+        {
+            if (!idProductoEsValido)
+            {
+                return false;
+            }
+            return true;
+        }
+        private string esValido()
+        {
+            string resultado = "";
+            if(this.idVenta == 0)
+            {
+                resultado = resultado + " El campo idVenta es invalido.";
+            }
+
+            if (!idProductoEsValido)
+            {
+                resultado = resultado + " El campo idProducto es invalido.";
+            }
+
+            return resultado;
+        }
+        public bool idProductoEsValido
+        {
+            get {
+                return (this.idProducto == 0);
+            }
+        }
+
         public void guardar()
         {
+            string mensaje = esValido();
+            if (mensaje.Length > 0)
+            {
+                throw new Exception(mensaje);
+            }
+
             //Creo un diccionario para guardar los parametros
             Dictionary<string, object> parametros = new Dictionary<string, object>();
             //Al diccionario "parametros" agregamos el nombre del parametro del
