@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Lowes
 {
-    public partial class Form1 : Form
+    public partial class frmVentas : Form
     {
-        public Form1()
+        public frmVentas()
         {
             InitializeComponent();
         }

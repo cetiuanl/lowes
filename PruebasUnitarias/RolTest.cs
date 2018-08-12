@@ -57,7 +57,7 @@ namespace PruebasUnitarias
             List<Rol> roles = null;
             try
             {
-                roles = Rol.TraerTodos();                
+                roles = Rol.traerTodos(false);                
             }
             catch (Exception ex)
             {

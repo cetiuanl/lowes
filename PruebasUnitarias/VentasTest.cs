@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LowesCN;
+using System.Collections.Generic;
 
 namespace PruebasUnitarias
 {
@@ -25,6 +26,23 @@ namespace PruebasUnitarias
             }
 
             Assert.IsTrue(result, mensaje);
+        }
+
+        public void TestTraerTodos()
+        {
+            string mensaje = "";
+
+            List<Ventas> listado = null;
+            try
+            {
+                listado = Ventas.traerTodos(false);
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message.ToString();
+            }
+
+            Assert.IsTrue((listado.Count > 0), mensaje);
         }
     }
 }
