@@ -23,5 +23,12 @@ namespace Lowes
             form.MdiParent = this;
             form.Show();
         }
+
+        private void productosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          frmProducto form = new frmProducto();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }
