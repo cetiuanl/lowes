@@ -33,7 +33,7 @@ namespace LowesCN
 
         public CategoriaProducto(DataRow item)
         {
-            // this.item = item;
+           // this.item = item;
         }
         #endregion
         #region metodos y funciones
@@ -108,14 +108,11 @@ namespace LowesCN
                 }
                 return oResultado;
                                
-                else {
-                    throw new Exception("id no valido.");
-                }
-            }
+            else {
+                throw new Exception("id no valido.");
+            }        
         }
-    
-
-}        public static List<CategoriaProducto> traerTodos(bool soloActivos)
+        public static List<CategoriaProducto> traerTodos(bool soloActivos)
     { 
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
         if (soloActivos)
@@ -128,8 +125,12 @@ namespace LowesCN
 
                 foreach (DataRow item in dt.Rows)
                 {
-                parametros.Add("@esActivo", true);
+            //listado.Add("@esActivo", true);
+        }
+
+        return listado;
     }
 
         #endregion
-    
+    }    
+}

@@ -1,6 +1,6 @@
 ﻿namespace Lowes
 {
-    partial class frmVentas
+    partial class frmRol
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // frmVentas
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(186, 434);
-            this.Name = "frmVentas";
-            this.Text = "frmVentas";
-            this.ResumeLayout(false);
-
+            this.Text = "frmRol";
         }
 
         #endregion
