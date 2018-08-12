@@ -125,10 +125,11 @@ namespace LowesCN
                 {
                     throw new Exception("No se elimino el registro.");
                 }
-                else
-                {
-                    throw new Exception("Id invalido.");
-                }
+                
+            }
+            else
+            {
+                throw new Exception("Id invalido.");
             }
         }
         public static Cliente traerPorId(int idCliente)
