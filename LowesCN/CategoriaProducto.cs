@@ -19,22 +19,22 @@ namespace LowesCN
 
         #endregion
         #region Constructores
-        public CategoriaProducto(int _idCategoria, string _nombre,
-            bool _esActivo, DateTime _fechaCreacion, string _descripcion)
+        public CategoriaProducto(int _idCategoria, string _nombre, DateTime _fechaCreacion, string _descripcion)
         {
             idCategoria = _idCategoria;
             nombre = _nombre;
-            esActivo = _esActivo;
             fechaCreacion = _fechaCreacion;
-            descripcion = _descripcion;
-
-
+            descripcion = _descripcion;            
         }
 
-        public CategoriaProducto(DataRow item)
+        public CategoriaProducto(DataRow fila)
         {
-           // this.item = item;
+            idCategoria = fila.Field<int>("idCategoria");
+            nombre = fila.Field<string>("nombre");            
+            descripcion = fila.Field<string>("descripcion");
+            fechaCreacion = fila.Field<DateTime>("fechaCreacion");
         }
+
         #endregion
         #region metodos y funciones
         public void guardar()
@@ -43,9 +43,8 @@ namespace LowesCN
             //Al diccionario "parametros" agregamos el nombre del parametro del
             // Store Procedure y su valor (propiedad de la clase correspondiente)            
 
-            parametros.Add("@idCategoria", this.idCategoria);
-            parametros.Add("@Descripcion", this.descripcion);
             parametros.Add("@nombre", this.nombre);
+            parametros.Add("@Descripcion", this.descripcion);
 
 
             //Si idCategoriaProducto es mayor a 0, significa que es una registro existente, usar un Update            
@@ -54,10 +53,8 @@ namespace LowesCN
                 //Agregamos el parametro del id de la tabla utilizado para ubicar el registro
                 //a modificar
                 parametros.Add("@idCategoria", this.idCategoria);
-                parametros.Add("@descripcion", this.descripcion);
-                parametros.Add("@nombre", this.nombre);
-
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPUCategoria", parametros) == 0)
+               
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPUCategoriaProducto", parametros) == 0)
                 {
                     throw new Exception("No se actualizo el registro.");
                 }
@@ -93,7 +90,7 @@ namespace LowesCN
             {
 
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
-                parametros.Add("idCategoriaProducto", idCategoriaProducto);
+                parametros.Add("@idCategoriaProducto", idCategoriaProducto);
 
                 DataTable dt = new DataTable();
 
@@ -113,23 +110,23 @@ namespace LowesCN
             }        
         }
         public static List<CategoriaProducto> traerTodos(bool soloActivos)
-    { 
-                Dictionary<string, object> parametros = new Dictionary<string, object>();
-        if (soloActivos)
-            parametros.Add("@esActivo", true);
-                DataTable dt = new DataTable();
+        {
+            Dictionary<string, object> parametros = new Dictionary<string, object>();
+            if (soloActivos)
+                parametros.Add("@esActivo", true);
+            DataTable dt = new DataTable();
 
-                DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
+            DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
 
-                List<CategoriaProducto> listado = new List<CategoriaProducto>();
+            List<CategoriaProducto> listado = new List<CategoriaProducto>();
 
-                foreach (DataRow item in dt.Rows)
-                {
-            //listado.Add("@esActivo", true);
+            foreach (DataRow fila in dt.Rows)
+            {
+                listado.Add(new CategoriaProducto(fila));
+            }
+        
+            return listado;
         }
-
-        return listado;
-    }
 
         #endregion
     }    
