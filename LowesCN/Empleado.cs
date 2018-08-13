@@ -35,7 +35,7 @@ namespace LowesCN
             nombreCompleto = _nombreCompleto;
             fechaNacimiento = _fechaNacimiento;
             usuario = _usuario;
-            contrasena = _contrasena;
+            contrasena = SHA.GenerateSHA512String(_contrasena);
             idRol = _idRol;
             //esActivo = _esActivo;
             fechaCreacion = _fechaCreacion;
@@ -45,16 +45,16 @@ namespace LowesCN
                 DateTime _fechaNacimiento,
                 string _usuario,
                 string _contrasena,
-                int _idRol,
-                bool _esActivo)
+                int _idRol)
+               // bool _esActivo)
         {
             idEmpleado = _idEmpleado;
             nombreCompleto = _nombreCompleto;
             fechaNacimiento = _fechaNacimiento;
             usuario = _usuario;
-            contrasena = _contrasena;
+            contrasena = SHA.GenerateSHA512String(_contrasena);
             idRol = _idRol;
-            esActivo = _esActivo;
+            //esActivo = _esActivo;
         }
 
         public Empleado(DataRow fila)
@@ -150,7 +150,7 @@ namespace LowesCN
 
                 DataTable dt = new DataTable();
 
-                DataBaseHelper.Fill(dt, "dbo.SPSEmpleado", parametros);
+                DataBaseHelper.Fill(dt, "dbo.SPSEmpleados", parametros);
 
                 Empleado oResultado = null;
 
@@ -177,7 +177,7 @@ namespace LowesCN
 
             DataTable dt = new DataTable();
 
-            DataBaseHelper.Fill(dt, "dbo.SPSEmpleado", parametros);
+            DataBaseHelper.Fill(dt, "dbo.SPSEmpleados", parametros);
 
             List<Empleado> listado = new List<Empleado>();
 
