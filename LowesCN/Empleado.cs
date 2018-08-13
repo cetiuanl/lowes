@@ -28,7 +28,7 @@ namespace LowesCN
                         string _usuario,
                         string _contrasena,
                         int _idRol,
-                        bool _esActivo,
+                        //bool _esActivo,
                         DateTime _fechaCreacion)
         {
             idEmpleado = _idEmpleado;
@@ -37,7 +37,7 @@ namespace LowesCN
             usuario = _usuario;
             contrasena = _contrasena;
             idRol = _idRol;
-            esActivo = _esActivo;
+            //esActivo = _esActivo;
             fechaCreacion = _fechaCreacion;
         }
         public Empleado(int _idEmpleado,
