@@ -16,8 +16,8 @@ namespace PruebasUnitarias
 
             try
             {
-                Producto nuevoProducto = new Producto(0, "producto demo", 100.50, 120.60, 20, 1, "pza.", true);
-                nuevoProducto.guardar();
+                //Producto nuevoProducto = new Producto(0, "producto demo", 100.50, 120.60, 20, 1, "pza.", true);
+                //nuevoProducto.guardar();
                 result = true;
             }
             catch (Exception ex)

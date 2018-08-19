@@ -18,7 +18,7 @@ namespace Lowes
             {
                 if (instancia == null || instancia.IsDisposed)
                 {
-                    instancia = new frmProducto
+                    instancia = new frmProducto();
                 }
                 return instancia;
             }

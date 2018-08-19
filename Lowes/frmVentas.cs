@@ -16,7 +16,7 @@ namespace Lowes
 
         private static frmVentas instancia;
 
-        private static frmVentas getInstancia
+        public static frmVentas getInstancia
         {
             get
             {
