@@ -76,7 +76,7 @@ namespace Lowes
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            Ventas limpiar = new Ventas(0, 0, "", 0, 0, 0);
+            Ventas limpiar = new Ventas(0, 0, DateTime.Today, 0, 0, "");
             VentaActual = limpiar;
         }
     }

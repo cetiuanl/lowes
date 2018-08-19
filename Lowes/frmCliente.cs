@@ -13,6 +13,19 @@ namespace Lowes
 {
     public partial class frmCliente : Form
     {
+        private static frmCliente instancia;
+
+        public static frmCliente getInstancia
+        {
+            get
+            {
+                if(instancia == null|| instancia.IsDisposed)
+                {
+                    instancia = new frmCliente();
+                }
+                return instancia;
+            }
+        }
         private Cliente clienteActual
         {
             get
@@ -52,14 +65,38 @@ namespace Lowes
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            clienteActual.guardar();
-            cargarDatos();
+            try
+            {
+                clienteActual.guardar();
+                cargarDatos();
+            }
+            catch (Exception ex)
+            {
+                string mensaje = $"{ex.Message}";
+                MessageBox.Show(mensaje, 
+                    "Ha ocurrido un error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Cliente.desactivar(clienteActual.idCliente);
-            cargarDatos();
+            try
+            {
+                Cliente.desactivar(clienteActual.idCliente);
+                cargarDatos();
+            }
+            catch (Exception ex)
+            {
+                string mensaje = $"{ex.Message}";
+                MessageBox.Show(mensaje,
+                    "Ha ocurrido un error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
