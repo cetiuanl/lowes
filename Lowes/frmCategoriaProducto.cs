@@ -12,7 +12,20 @@ using LowesCN;
 namespace Lowes
 {
     public partial class frmCategoriaProducto : Form
-    {        
+    {
+        private static frmCategoriaProducto instancia;
+        public static frmCategoriaProducto getInstancia
+        {
+            get
+            {
+                if (instancia == null || instancia.IsDisposed)
+                {
+                    instancia = new frmCategoriaProducto();
+                }
+                return instancia;
+            }
+        }
+
         private CategoriaProducto categoriaActual
         {
             get
