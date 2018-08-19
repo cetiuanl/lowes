@@ -44,8 +44,8 @@
             this.txtUnidad = new System.Windows.Forms.TextBox();
             this.lblIdCategoria = new System.Windows.Forms.Label();
             this.lblInventario = new System.Windows.Forms.Label();
-            this.txtIdCategoria = new System.Windows.Forms.TextBox();
             this.txtInventario = new System.Windows.Forms.TextBox();
+            this.cbxIdCategoria = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgbProductos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -191,13 +191,6 @@
             this.lblInventario.TabIndex = 14;
             this.lblInventario.Text = "Inventario";
             // 
-            // txtIdCategoria
-            // 
-            this.txtIdCategoria.Location = new System.Drawing.Point(490, 247);
-            this.txtIdCategoria.Name = "txtIdCategoria";
-            this.txtIdCategoria.Size = new System.Drawing.Size(100, 20);
-            this.txtIdCategoria.TabIndex = 13;
-            // 
             // txtInventario
             // 
             this.txtInventario.Location = new System.Drawing.Point(490, 208);
@@ -205,16 +198,24 @@
             this.txtInventario.Size = new System.Drawing.Size(100, 20);
             this.txtInventario.TabIndex = 12;
             // 
+            // cbxIdCategoria
+            // 
+            this.cbxIdCategoria.FormattingEnabled = true;
+            this.cbxIdCategoria.Location = new System.Drawing.Point(490, 246);
+            this.cbxIdCategoria.Name = "cbxIdCategoria";
+            this.cbxIdCategoria.Size = new System.Drawing.Size(121, 21);
+            this.cbxIdCategoria.TabIndex = 19;
+            // 
             // frmProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 444);
+            this.Controls.Add(this.cbxIdCategoria);
             this.Controls.Add(this.lblUnidad);
             this.Controls.Add(this.txtUnidad);
             this.Controls.Add(this.lblIdCategoria);
             this.Controls.Add(this.lblInventario);
-            this.Controls.Add(this.txtIdCategoria);
             this.Controls.Add(this.txtInventario);
             this.Controls.Add(this.lblPrecioVenta);
             this.Controls.Add(this.lblPrecioCompra);
@@ -255,7 +256,7 @@
         private System.Windows.Forms.TextBox txtUnidad;
         private System.Windows.Forms.Label lblIdCategoria;
         private System.Windows.Forms.Label lblInventario;
-        private System.Windows.Forms.TextBox txtIdCategoria;
         private System.Windows.Forms.TextBox txtInventario;
+        private System.Windows.Forms.ComboBox cbxIdCategoria;
     }
 }

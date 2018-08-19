@@ -12,7 +12,19 @@ namespace Lowes
 {
     public partial class frmProducto : Form
     {
+        private static frmProducto instancia;
+        public static frmProducto getInstancia {
+            get
+            {
+                if (instancia == null || instancia.IsDisposed)
+                {
+                    instancia = new frmProducto
+                }
+                return instancia;
+            }
 
+        }
+       
        private Producto productoActual
         {
             get
@@ -22,7 +34,7 @@ namespace Lowes
                 decimal precioCompra = DecimalExtensions.ParseDecimal( txtPrecioCompra.Text);
                 decimal precioVenta = DecimalExtensions.ParseDecimal(txtPrecioVenta.Text);
                 decimal inventario = DecimalExtensions.ParseDecimal(txtInventario.Text);
-                int idCategoriaProducto = IntegerExtensions.ParseInt(txtIdCategoria.Text);
+                int idCategoriaProducto = IntegerExtensions.ParseInt( cbxIdCategoria.SelectedValue.ToString());
                 string unidad = (txtUnidad.Text);
 
                 return new Producto(idProducto, nombre, precioCompra, precioVenta, inventario, idCategoriaProducto, unidad);
@@ -34,7 +46,7 @@ namespace Lowes
                 txtPrecioCompra.Text = value.precioCompra.ToString();
                 txtPrecioVenta.Text = value.precioVenta.ToString();
                 txtInventario.Text = value.inventario.ToString();
-                txtIdCategoria.Text = value.idCategoria.ToString();
+                cbxIdCategoria.SelectedValue = value.idCategoria.ToString();
                 txtUnidad.Text = value.unidad.ToString();
 
             }
@@ -52,18 +64,40 @@ namespace Lowes
 
         private void cargarDatos()
         {
+            
             dgbProductos.DataSource = Producto.traerTodos(true);
             dgbProductos.Refresh();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            productoActual.guardar();
-            cargarDatos();
+            try
+            {
+                productoActual.guardar();
+                cargarDatos();
+            }
+            catch (Exception ex)
+            {
+                string mensaje = $"Mensaje de error: {ex.Message} Fin";
+                MessageBox.Show(mensaje, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+              
+            }
+            
         }
 
         private void btnEliminate_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Producto.desactivar(productoActual.idProducto);
+                cargarDatos();
+            }
+            catch (Exception ex)
+            {
+                string mensaje = $"Mensaje de error: {ex.Message} Fin";
+                MessageBox.Show(mensaje, "Ha ocurrido un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
             Producto.desactivar(productoActual.idProducto);
             cargarDatos();
         }
