@@ -38,25 +38,27 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(144, 62);
+            this.textBox1.MaxLength = 50;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(134, 20);
-            this.textBox1.TabIndex = 0;
+            this.textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(144, 103);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(134, 20);
-            this.textBox2.TabIndex = 1;
+            this.textBox2.TabIndex = 2;
             // 
             // btnSesion
             // 
             this.btnSesion.Location = new System.Drawing.Point(165, 170);
             this.btnSesion.Name = "btnSesion";
             this.btnSesion.Size = new System.Drawing.Size(100, 23);
-            this.btnSesion.TabIndex = 2;
+            this.btnSesion.TabIndex = 3;
             this.btnSesion.Text = "Iniciar Sesion";
             this.btnSesion.UseVisualStyleBackColor = true;
+            this.btnSesion.Click += new System.EventHandler(this.btnSesion_Click);
             // 
             // label1
             // 
@@ -88,6 +90,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "frmIniciarSesion";
             this.Text = "frmIniciarSesion";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmIniciarSesion_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
