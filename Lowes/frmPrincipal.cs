@@ -19,42 +19,42 @@ namespace Lowes
 
         private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmCategoriaProducto form = new frmCategoriaProducto();
+            frmCategoriaProducto form = frmCategoriaProducto.getInstancia;
             form.MdiParent = this;
             form.Show();
         }
 
         private void productosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          frmProducto form = new frmProducto();
+          frmProducto form = frmProducto.getInstancia;
             form.MdiParent = this;
             form.Show();
         }
 
         private void empleadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmEmpleado form = new frmEmpleado();
+            frmEmpleado form = frmEmpleado.getInstancia;
             form.MdiParent = this;
             form.Show();
         }
 
         private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmRol form = new frmRol();
+            frmRol form = frmRol.getInstancia;
             form.MdiParent = this;
             form.Show();
         }
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmCliente form = new frmCliente();
+            frmCliente form = frmCliente.getInstancia;
             form.MdiParent = this;
             form.Show();
         }
 
         private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmVentas form = new frmVentas();
+            frmVentas form = frmVentas.getInstancia;
             form.MdiParent = this;
             form.Show();
         }

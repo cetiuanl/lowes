@@ -10,6 +10,9 @@ namespace LowesCN
 {
     public class Cliente
     {
+        public static string DisplayMember = "nombreCompleto";
+        public static string ValueMember = "idCliente";
+
         #region propiedades
         public int idCliente { get; private set; }
         public string nombreCompleto { get; private set; }
@@ -125,10 +128,11 @@ namespace LowesCN
                 {
                     throw new Exception("No se elimino el registro.");
                 }
-                else
-                {
-                    throw new Exception("Id invalido.");
-                }
+                
+            }
+            else
+            {
+                throw new Exception("Id invalido.");
             }
         }
         public static Cliente traerPorId(int idCliente)
