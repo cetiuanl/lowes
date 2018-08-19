@@ -49,13 +49,38 @@ namespace Lowes
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            categoriaActual.guardar();
-            cargarDatos();
+            try
+            {
+                categoriaActual.guardar();
+                cargarDatos();
+            }
+            catch (Exception ex)
+            {
+                string mensaje = $"{ex.Message} Contacta al administrador.";
+
+                MessageBox.Show(mensaje,
+                                "Ha ocurrido un error.",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+            
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            CategoriaProducto.desactivar(categoriaActual.idCategoria);
-            cargarDatos();
+            try
+            {
+                CategoriaProducto.desactivar(categoriaActual.idCategoria);
+                cargarDatos();
+            }
+            catch (Exception ex)
+            {
+                string mensaje = $"{ex.Message} Contacta al administrador.";
+
+                MessageBox.Show(mensaje,
+                                "Ha ocurrido un error.",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }            
         }
         private void btnLimpiar_Click(object sender, EventArgs e)
         {

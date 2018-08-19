@@ -10,6 +10,9 @@ namespace LowesCN
 {
     public class Cliente
     {
+        public static string DisplayMember = "nombreCompleto";
+        public static string ValueMember = "idCliente";
+
         #region propiedades
         public int idCliente { get; private set; }
         public string nombreCompleto { get; private set; }
