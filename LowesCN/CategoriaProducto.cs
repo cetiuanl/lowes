@@ -19,11 +19,10 @@ namespace LowesCN
 
         #endregion
         #region Constructores
-        public CategoriaProducto(int _idCategoria, string _nombre, DateTime _fechaCreacion, string _descripcion)
+        public CategoriaProducto(int _idCategoria, string _nombre, string _descripcion)
         {
             idCategoria = _idCategoria;
             nombre = _nombre;
-            fechaCreacion = _fechaCreacion;
             descripcion = _descripcion;            
         }
 
@@ -54,14 +53,14 @@ namespace LowesCN
                 //a modificar
                 parametros.Add("@idCategoria", this.idCategoria);
                
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPUCategoriaProducto", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPUCategoriaProductos", parametros) == 0)
                 {
                     throw new Exception("No se actualizo el registro.");
                 }
             }
             else //Si idCategoriaProducto = cero, significa que es una registro nuevo, entonces usar Insert.
             {
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPICategoriaProducto", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPICategoriaProductos", parametros) == 0)
                 {
                     throw new Exception("No se creó el registro.");
                 }
@@ -74,7 +73,7 @@ namespace LowesCN
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("@idCategoriaProducto", idCategoriaProducto);
 
-                if (DataBaseHelper.ExecuteNonQuery("dbo.SPDCategoriaProducto", parametros) == 0)
+                if (DataBaseHelper.ExecuteNonQuery("dbo.SPDCategoriaProductos", parametros) == 0)
                 {
                     throw new Exception("No se elimino el registro");
                 }
@@ -94,7 +93,7 @@ namespace LowesCN
 
                 DataTable dt = new DataTable();
 
-                DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
+                DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProductos", parametros);
 
                 CategoriaProducto oResultado = null;
 
@@ -116,7 +115,7 @@ namespace LowesCN
                 parametros.Add("@esActivo", true);
             DataTable dt = new DataTable();
 
-            DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProducto", parametros);
+            DataBaseHelper.Fill(dt, "dbo.SPSCategoriaProductos", parametros);
 
             List<CategoriaProducto> listado = new List<CategoriaProducto>();
 

@@ -13,6 +13,19 @@ namespace Lowes
 {
     public partial class frmRol : Form
     {
+        private static frmRol instancia;
+        public static frmRol getInstancia
+        {
+            get
+            {
+                if (instancia == null || instancia.IsDisposed)
+                {
+                    instancia = new frmRol();
+                }
+                return instancia;
+            }
+
+        }
         private Rol RolActual
         {
             get
@@ -51,14 +64,38 @@ namespace Lowes
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            RolActual.guardar();
-            cargarDatos();
+            try
+            {
+                RolActual.guardar();
+                cargarDatos();
+            }
+            catch (Exception ex)
+            {
+
+                String mensaje = $"{ex.Message} Contacta al Administrador";
+                MessageBox.Show(mensaje, "Ha ocurrido un error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Rol.desactivar(RolActual.idRol);
-            cargarDatos();
+            try
+            {
+                Rol.desactivar(RolActual.idRol);
+                cargarDatos();
+            }
+            catch (Exception ex)
+            {
+
+                String mensaje = $"{ex.Message} Contacta al Administrador";
+                MessageBox.Show(mensaje, "Ha ocurrido un error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            
 
         }
 

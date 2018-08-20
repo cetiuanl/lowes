@@ -12,7 +12,7 @@ using LowesCN;
 namespace Lowes
 {
     public partial class frmVentas : Form
-    {
+    {       
 
         private static frmVentas instancia;
 
@@ -36,9 +36,13 @@ namespace Lowes
                 int idVenta = IntegerExtensions.ParseInt(txtIdVenta.Text);
                 int idEmpleado = IntegerExtensions.ParseInt(txtidEmpleado.Text);
                 DateTime fecha = dtpFechaVenta.Value;
-                int estatus = IntegerExtensions.ParseInt(cboEstatusFacturacion.Text);
-                int idCliente = IntegerExtensions.ParseInt(cboidCliente.Text);
+                int estatus = IntegerExtensions.ParseInt(cboEstatusFacturacion.SelectedValue.ToString());
+
+                string idClienteValue = cboidCliente.SelectedValue.ToString();
+                int idCliente = IntegerExtensions.ParseInt(idClienteValue);
+
                 string tipoPago = cboFormaPago.SelectedText.ToString();
+
                 return new Ventas(idVenta, idEmpleado, fecha, estatus, idCliente,tipoPago);
             }
             set
@@ -46,8 +50,10 @@ namespace Lowes
                 txtIdVenta.Text = value.idVenta.ToString();
                 txtidEmpleado.Text = value.idCliente.ToString();
                 dtpFechaVenta.Value = value.fechaVenta;
-                cboEstatusFacturacion.Text = value.estatus.ToString();
-                cboidCliente.SelectedText = value.idCliente.ToString();
+
+                cboEstatusFacturacion.SelectedValue = value.estatus;
+                cboidCliente.SelectedValue = value.idCliente;
+
                 cboFormaPago.SelectedText = value.tipoPago;
             }
         }
@@ -66,6 +72,33 @@ namespace Lowes
         {
             dgvVenta.DataSource = Ventas.traerTodos(true);
             dgvVenta.Refresh();
+
+            cboidCliente.DataSource = Cliente.traerTodos(true);
+            cboidCliente.DisplayMember = Cliente.DisplayMember;
+            cboidCliente.ValueMember = Cliente.ValueMember;
+            cboidCliente.Refresh();
+
+            List<ModoPago> listadoTiposPago = new List<ModoPago>();
+
+            listadoTiposPago.Add(new ModoPago(1,"Tarjeta de Credito"));
+            listadoTiposPago.Add(new ModoPago(2, "Efectivo"));
+            listadoTiposPago.Add(new ModoPago(3, "Cheque"));
+
+            cboFormaPago.DataSource = listadoTiposPago;
+            cboFormaPago.DisplayMember = ModoPago.DisplayMember;
+            cboFormaPago.ValueMember = ModoPago.ValueMember;
+            cboFormaPago.Refresh();
+
+            List<EstatusVenta> listadoEstatusVenta = new List<EstatusVenta>();
+
+            listadoEstatusVenta.Add(new EstatusVenta(1, "Pendiente"));
+            listadoEstatusVenta.Add(new EstatusVenta(2, "Facturado"));
+            listadoEstatusVenta.Add(new EstatusVenta(3, "Cancelado"));
+
+            cboEstatusFacturacion.DataSource = listadoEstatusVenta;
+            cboEstatusFacturacion.DisplayMember = EstatusVenta.DisplayMember;
+            cboEstatusFacturacion.ValueMember = EstatusVenta.ValueMember;
+            cboEstatusFacturacion.Refresh();
         }
 
        
