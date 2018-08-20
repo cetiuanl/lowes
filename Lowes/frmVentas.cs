@@ -34,7 +34,7 @@ namespace Lowes
             get
             {
                 int idVenta = IntegerExtensions.ParseInt(txtIdVenta.Text);
-                int idEmpleado = IntegerExtensions.ParseInt(txtidEmpleado.Text);
+                int idEmpleado = Sesion.getInstancia.empleadoActual.idEmpleado; //IntegerExtensions.ParseInt(txtidEmpleado.Text);
                 DateTime fecha = dtpFechaVenta.Value;
                 int estatus = IntegerExtensions.ParseInt(cboEstatusFacturacion.SelectedValue.ToString());
 

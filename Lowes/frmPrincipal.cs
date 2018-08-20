@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LowesCN;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -59,7 +60,32 @@ namespace Lowes
             form.Show();
         }
 
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+            frmIniciarSesion frm = new frmIniciarSesion();
 
+            DialogResult result = frm.ShowDialog();
+            
+            if (result == DialogResult.Abort)
+            {
+                this.Close();
+            }         
+            else if (result == DialogResult.OK)
+            {
+                if (Sesion.getInstancia.rolActual.nombre == "Administrador")
+                {
+                    categoriasToolStripMenuItem.Enabled = true;
+                }
+                else
+                {
+                    categoriasToolStripMenuItem.Enabled = false;
+                }
 
+            }   
+            else if (result == DialogResult.Retry)
+            {
+                MessageBox.Show("Ha ocurrido un problema. Vuelve a intentar.");
+            }
+        }
     }
 }

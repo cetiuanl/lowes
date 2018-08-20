@@ -187,23 +187,32 @@ namespace LowesCN
             }
             return listado;
         }
-        //public static List<Empleado> traerActivos()
-        //{
-        //    Dictionary<string, object> parametros = new Dictionary<string, object>();
-        //    parametros.Add("@esActivo", true);
+        public static Empleado validar(string usuario, string contrasena)
+        {
+            if (usuario.Length > 0)
+            {
+                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                parametros.Add("@usuario", usuario);
+                parametros.Add("@contrasena", contrasena);
 
-        //    DataTable dt = new DataTable();
+                DataTable dt = new DataTable();
 
-        //    DataBaseHelper.Fill(dt, "dbo.SPSEmpleado", parametros);
+                DataBaseHelper.Fill(dt, "dbo.SPValidarEmpleado", parametros);
 
-        //    List<Empleado> listado = new List<Empleado>();
+                Empleado oResultado = null;
 
-        //    foreach (DataRow item in dt.Rows)
-        //    {
-        //        listado.Add(new Empleado(item));
-        //    }
-        //    return listado;
-        //}
+                foreach (DataRow item in dt.Rows)
+                {
+                    oResultado = new Empleado(item);
+                    break;
+                }
+                return oResultado;
+            }
+            else
+            {
+                throw new Exception("usuario invalido.");
+            }
+        }
         #endregion
     }
 }
