@@ -102,6 +102,9 @@
     <EmbeddedResource Include="frmCategoriaProducto.resx">
       <DependentUpon>frmCategoriaProducto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmIniciarSesion.resx">
+      <DependentUpon>frmIniciarSesion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmProducto.resx">
       <DependentUpon>frmProducto.cs</DependentUpon>
     </EmbeddedResource>
