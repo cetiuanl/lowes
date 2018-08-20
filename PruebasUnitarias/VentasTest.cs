@@ -16,7 +16,8 @@ namespace PruebasUnitarias
 
             try
             {
-                Ventas nuevoVenta = new Ventas(0,109,2018-08-05,1,3,"Efectivo");
+                DateTime fecha = new DateTime(2014, 10, 11);
+                Ventas nuevoVenta = new Ventas(0,109,DateTime.Today,1,3,"Efectivo");
                 nuevoVenta.guardar();
                 result = true;
             }
